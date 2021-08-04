@@ -1,0 +1,18 @@
+<div class="form-group">
+  <input type="search" class="form-control" #search (keyup.enter)="searchResult(search.value)">
+</div>
+<div class="form-group">
+  <button class="btn btn-primary" (click)="searchResult(search.value)" >Search</button>
+</div>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "pacman" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
+<pagination-controls *ngIf="arrayOfPhotos" (pageChange)="page = $event"></pagination-controls>
+<p *ngIf="isNone">Not found</p>
+<div class="cardsWrapper">
+  <div class="card"  *ngFor="let item of arrayOfPhotos |  paginate: { itemsPerPage: 12, currentPage: page }"  >
+    <img src="https://live.staticflickr.com/{{item.server}}/{{item.id}}_{{item.secret}}.jpg" width="100%" height="200px">
+
+    <button type="button" (click)="savePhoto(item)">Save</button>
+  </div>
+</div>
+
+
